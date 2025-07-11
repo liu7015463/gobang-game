@@ -1,8 +1,18 @@
 'use client';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, Ref } from 'react';
 import { BOARD_SIZE } from './context';
 
-export default function GameBoard() {
+export default function GameBoard({
+    canvasRef,
+    handleCanvasClick,
+    handleCanvasMouseMove,
+    handleCanvasMouseLeave,
+}: {
+    canvasRef: Ref<HTMLCanvasElement>;
+    handleCanvasClick: Function;
+    handleCanvasMouseMove: Function;
+    handleCanvasMouseLeave: Function;
+}) {
     const [canvasSize, setCanvasSize] = useState(400); // 默认尺寸
 
     useEffect(() => {
@@ -11,10 +21,6 @@ export default function GameBoard() {
         setCanvasSize(size);
     }, []);
 
-    const canvasRef = useRef(null);
-    function handleCanvasClick() {}
-    function handleCanvasMouseMove() {}
-    function handleCanvasMouseLeave() {}
     return (
         <div
             className="aspect-square bg-board rounded-lg shadow-lg overflow-hidden board-grid"
@@ -25,9 +31,9 @@ export default function GameBoard() {
                 width={canvasSize}
                 height={canvasSize}
                 className="w-full h-full cursor-pointer"
-                onClick={handleCanvasClick}
-                onMouseMove={handleCanvasMouseMove}
-                onMouseLeave={handleCanvasMouseLeave}
+                onClick={(e) => handleCanvasClick(e)}
+                onMouseMove={(e) => handleCanvasMouseMove(e)}
+                onMouseLeave={() => handleCanvasMouseLeave()}
             ></canvas>
         </div>
     );
