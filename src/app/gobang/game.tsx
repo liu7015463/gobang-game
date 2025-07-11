@@ -1,8 +1,9 @@
 'use client';
 import { GameContext, GameStateContext } from './context';
-import GameArea from './game.area';
+import GameController from './game.controller';
 import GameFooter from './game.footer';
 import GameHead from './game.head';
+import GameMain from './game.main';
 import './gobang.css';
 
 export default function Game() {
@@ -11,7 +12,10 @@ export default function Game() {
             <GameHead />
             <GameContext.Provider value={{ currentPlayer: 1, moveHistory: [] }}>
                 <GameStateContext.Provider value={{ gameActive: false, winner: undefined }}>
-                    <GameArea />
+                    <div className="p-6 md:p-8 flex flex-col md:flex-row gap-6">
+                        <GameMain />
+                        <GameController />
+                    </div>
                 </GameStateContext.Provider>
             </GameContext.Provider>
             <GameFooter />
