@@ -1,3 +1,4 @@
+'use client';
 import { GameContext, GameStateContext } from './context';
 import GameArea from './game.area';
 import GameFooter from './game.footer';
@@ -8,11 +9,11 @@ export default function Game() {
     return (
         <div className="max-w-4xl w-full bg-white rounded-2xl shadow-xl overflow-hidden">
             <GameHead />
-            <GameContext value={{ currentPlayer: 1, moveHistory: [] }}>
-                <GameStateContext value={{ gameActive: false, winner: undefined }}>
+            <GameContext.Provider value={{ currentPlayer: 1, moveHistory: [] }}>
+                <GameStateContext.Provider value={{ gameActive: false, winner: undefined }}>
                     <GameArea />
-                </GameStateContext>
-            </GameContext>
+                </GameStateContext.Provider>
+            </GameContext.Provider>
             <GameFooter />
         </div>
     );

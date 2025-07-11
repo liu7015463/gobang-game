@@ -1,3 +1,4 @@
+'use client';
 import { useContext } from 'react';
 import { GameContext, GameStateContext, isNil } from './context';
 
