@@ -1,6 +1,5 @@
 'use client';
 import { useEffect, useState, Ref } from 'react';
-import { BOARD_SIZE } from './context';
 
 export default function GameBoard({
     canvasRef,
@@ -22,10 +21,7 @@ export default function GameBoard({
     }, []);
 
     return (
-        <div
-            className="aspect-square bg-board rounded-lg shadow-lg overflow-hidden board-grid"
-            style={{ backgroundSize: `calc(100% / ${BOARD_SIZE - 1}) calc(100% / ${BOARD_SIZE - 1})` }}
-        >
+        <div className="aspect-square bg-board rounded-lg shadow-lg overflow-hidden">
             <canvas
                 ref={canvasRef}
                 width={canvasSize}

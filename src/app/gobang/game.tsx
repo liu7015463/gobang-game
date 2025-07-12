@@ -132,9 +132,10 @@ export default function Game() {
             ctx.stroke();
         }
 
+        // 绘制星位点（天元和星位）
         starterPoints().forEach((point) => {
             ctx.beginPath();
-            ctx.arc(point.x * cellSize, point.y * cellSize, 4, 0, Math.PI);
+            ctx.arc(point.x * cellSize, point.y * cellSize, 4, 0, Math.PI * 2);
             ctx.fillStyle = '#8B4513';
             ctx.fill();
         });
