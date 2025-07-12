@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { BOARD_SIZE, GameContext, GameStateContext, STARTER_PLAYER } from './context';
 import GameFooter from './game.footer';
 import GameHead from './game.head';
@@ -68,7 +68,7 @@ export default function Game() {
     /**
      * 初始化
      */
-    function initGame() {
+    const initGame = useCallback(() => {
         setGameBoard(
             Array(BOARD_SIZE)
                 .fill([])
@@ -82,7 +82,7 @@ export default function Game() {
         setWinner(null);
 
         drawBoard();
-    }
+    }, []);
 
     function startTimer() {
         if (timerRef.current) {
@@ -103,7 +103,7 @@ export default function Game() {
     /**
      *
      */
-    function drawBoard() {
+    const drawBoard = useCallback(() => {
         const canvas = canvasRef.current;
         if (!canvas) {
             return;
@@ -146,7 +146,7 @@ export default function Game() {
                 }
             }
         }
-    }
+    }, [gameBoard]);
 
     /**
      * 绘制棋子
@@ -429,16 +429,16 @@ export default function Game() {
                         <div className="flex-1 relative">
                             <GameBoard
                                 canvasRef={canvasRef}
-                                handleCanvasClick={handleCanvasClick}
-                                handleCanvasMouseMove={handleCanvasMouseMove}
-                                handleCanvasMouseLeave={handleCanvasMouseLeave}
+                                handleCanvasClickAction={handleCanvasClick}
+                                handleCanvasMouseMoveAction={handleCanvasMouseMove}
+                                handleCanvasMouseLeaveAction={handleCanvasMouseLeave}
                             />
                             <GameStatus />
                         </div>
                         <div className="w-full md:w-80 flex flex-col gap-6">
                             <GameInfo />
                             <GameRule />
-                            <GameOperate handleRestart={handleRestart} handleUndo={handleUndo} />
+                            <GameOperate handleRestartAction={handleRestart} handleUndoAction={handleUndo} />
                         </div>
                     </div>
                 </GameStateContext.Provider>

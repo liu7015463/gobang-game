@@ -1,17 +1,17 @@
 'use client';
-import { useRef, useEffect, useState, Ref } from 'react';
+import { useEffect, useState, Ref } from 'react';
 import { BOARD_SIZE } from './context';
 
 export default function GameBoard({
     canvasRef,
-    handleCanvasClick,
-    handleCanvasMouseMove,
-    handleCanvasMouseLeave,
+    handleCanvasClickAction,
+    handleCanvasMouseMoveAction,
+    handleCanvasMouseLeaveAction,
 }: {
     canvasRef: Ref<HTMLCanvasElement>;
-    handleCanvasClick: Function;
-    handleCanvasMouseMove: Function;
-    handleCanvasMouseLeave: Function;
+    handleCanvasClickAction: (e: React.MouseEvent<HTMLCanvasElement>) => void;
+    handleCanvasMouseMoveAction: (e: React.MouseEvent<HTMLCanvasElement>) => void;
+    handleCanvasMouseLeaveAction: () => void;
 }) {
     const [canvasSize, setCanvasSize] = useState(400); // 默认尺寸
 
@@ -31,9 +31,9 @@ export default function GameBoard({
                 width={canvasSize}
                 height={canvasSize}
                 className="w-full h-full cursor-pointer"
-                onClick={(e) => handleCanvasClick(e)}
-                onMouseMove={(e) => handleCanvasMouseMove(e)}
-                onMouseLeave={() => handleCanvasMouseLeave()}
+                onClick={(e) => handleCanvasClickAction(e)}
+                onMouseMove={(e) => handleCanvasMouseMoveAction(e)}
+                onMouseLeave={() => handleCanvasMouseLeaveAction()}
             ></canvas>
         </div>
     );

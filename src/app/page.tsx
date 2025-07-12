@@ -20,7 +20,7 @@ export default function Home() {
                     这是刘毅的个人网站
                 </h1>
                 <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
-                <p className="text-gray-600 mt-6 text-lg">Welcome to Liu Yi's Personal Website</p>
+                <p className="text-gray-600 mt-6 text-lg">Welcome to Liu Yi&apos;s Personal Website</p>
             </div>
         </div>
     );
