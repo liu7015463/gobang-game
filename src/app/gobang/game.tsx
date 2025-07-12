@@ -112,27 +112,29 @@ export default function Game() {
         if (!ctx) {
             return;
         }
-        const cell_size = canvas.width / (BOARD_SIZE - 1);
-        const piece_size = cell_size * 0.8;
+        const cellSize = canvas.width / (BOARD_SIZE - 1);
+        const pieceSize = cellSize * 0.8;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         ctx.strokeStyle = '#8B4513';
         ctx.lineWidth = 1.5;
 
         for (let i = 0; i < BOARD_SIZE; i++) {
             ctx.beginPath();
-            ctx.moveTo(0, i * cell_size);
-            ctx.lineTo(canvas.width, i * cell_size);
+            ctx.moveTo(0, i * cellSize);
+            ctx.lineTo(canvas.width, i * cellSize);
             ctx.stroke();
 
             ctx.beginPath();
-            ctx.moveTo(i * cell_size, 0);
-            ctx.lineTo(i * cell_size, canvas.height);
+            ctx.moveTo(i * cellSize, 0);
+            ctx.lineTo(i * cellSize, canvas.height);
             ctx.stroke();
         }
 
         starterPoints().forEach((point) => {
             ctx.beginPath();
-            ctx.arc(point.x * cell_size, point.y * cell_size, 4, 0, Math.PI);
+            ctx.arc(point.x * cellSize, point.y * cellSize, 4, 0, Math.PI);
             ctx.fillStyle = '#8B4513';
             ctx.fill();
         });
@@ -140,7 +142,7 @@ export default function Game() {
         for (let i = 0; i < BOARD_SIZE; i++) {
             for (let j = 0; j < BOARD_SIZE; j++) {
                 if (gameBoard[i][j] !== -1) {
-                    drawPiece(ctx, i, j, gameBoard[i][j], cell_size, piece_size);
+                    drawPiece(ctx, i, j, gameBoard[i][j], cellSize, pieceSize);
                 }
             }
         }
@@ -295,9 +297,9 @@ export default function Game() {
         const x = (e.clientX - rect.left) * scaleX;
         const y = (e.clientY - rect.top) * scaleY;
 
-        const CELL_SIZE = canvas.width / (BOARD_SIZE - 1);
-        const col = Math.round(x / CELL_SIZE);
-        const row = Math.round(y / CELL_SIZE);
+        const cellSize = canvas.width / (BOARD_SIZE - 1);
+        const col = Math.round(x / cellSize);
+        const row = Math.round(y / cellSize);
 
         // 检查坐标是否在棋盘内且为空
         if (row >= 0 && row < BOARD_SIZE && col >= 0 && col < BOARD_SIZE && gameBoard[row][col] === -1) {
@@ -410,12 +412,12 @@ export default function Game() {
 
         setGameBoard((prevBoard) => {
             const newBoard = [...prevBoard];
-            newBoard[lastMove.row][lastMove.col] = 0;
+            newBoard[lastMove.row][lastMove.col] = -1;
             return newBoard;
         });
 
         setMoveHistory((prevHistory) => prevHistory.slice(0, -1));
-        setCurrentPlayer(steps % 2 === 1 ? 1 - STARTER_PLAYER : STARTER_PLAYER); // 回到上一个玩家
+        setCurrentPlayer(steps % 2 === 0 ? 1 - STARTER_PLAYER : STARTER_PLAYER); // 回到上一个玩家
     }
 
     return (
@@ -442,6 +444,25 @@ export default function Game() {
                 </GameStateContext.Provider>
             </GameContext.Provider>
             <GameFooter />
+            {showModal && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 opacity-100 transition-opacity duration-300">
+                    <div className="bg-white rounded-xl p-8 max-w-md w-full mx-4 transform transition-transform duration-300 scale-100">
+                        <div className="text-center">
+                            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i className="fa-solid fa-trophy text-3xl text-yellow-500"></i>
+                            </div>
+                            <h2 className="text-2xl font-bold mb-2">{winner === 1 ? '黑棋' : '白棋'}获胜!</h2>
+                            <p className="text-gray-600 mb-6">恭喜您赢得了这场精彩的比赛!</p>
+                            <button
+                                className="bg-primary hover:bg-primary/90 text-white py-3 px-8 rounded-lg font-medium btn-hover"
+                                onClick={handleRestart}
+                            >
+                                开始新游戏
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
