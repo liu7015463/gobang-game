@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 五子棋游戏 (Gobang Game)
 
-## Getting Started
+基于Next.js构建的五子棋游戏，支持双人对战模式。包含完整的游戏逻辑和响应式UI设计。
 
-First, run the development server:
+## 功能特性
+
+- 🎮 双人对战模式
+- 📊 实时显示游戏状态（当前玩家、获胜信息）
+- 🔄 游戏记录与撤销功能
+- 🎨 响应式界面设计
+- ⏱️ 游戏计时功能
+
+## 安装与运行
+
+### 前置要求
+
+- Node.js v18+
+- pnpm
+
+### 启动步骤
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# 克隆仓库
+git clone https://github.com/liu7015463/gobang-game.git
+cd gobang-game
+
+# 安装依赖
+pnpm install
+
+# 启动开发服务器
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+访问 [http://localhost:3000](http://localhost:3000) 开始游戏
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 技术栈
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- [Next.js](https://nextjs.org) - React框架
+- [TypeScript](https://www.typescriptlang.org/) - 类型安全的JavaScript
+- [Tailwind CSS](https://tailwindcss.com) - 实用优先的CSS框架
+- [ESLint](https://eslint.org) - 代码质量检查
+- [Prettier](https://prettier.io) - 代码格式化
 
-## Learn More
+## 部署方式
 
-To learn more about Next.js, take a look at the following resources:
+### Vercel 部署
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fliu7015463%2Fgobang-game)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Docker 部署
 
-## Deploy on Vercel
+```bash
+docker build -t gobang-game .
+docker run -p 3000:3000 gobang-game
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+详细Docker部署说明请参考 [DOCKER_DEPLOY.md](DOCKER_DEPLOY.md)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 项目结构
+
+```
+gobang-game/
+├── .dockerignore
+├── .gitignore
+├── .prettierrc.js
+├── DOCKER_DEPLOY.md
+├── docker-compose.yml
+├── Dockerfile
+├── eslint.config.mjs
+├── next.config.ts
+├── package.json
+├── pnpm-lock.yaml
+├── postcss.config.mjs
+├── README.md
+├── tailwind.config.js
+├── tsconfig.json
+├── public/
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── gobang.html
+│   ├── next.svg
+│   ├── vercel.svg
+│   └── window.svg
+├── src/
+│   └── app/
+│       ├── favicon.ico
+│       ├── globals.css
+│       ├── layout.tsx
+│       ├── page.tsx
+│       └── gobang/
+│           ├── context.ts
+│           ├── game.board.tsx
+│           ├── game.footer.tsx
+│           ├── game.head.tsx
+│           ├── game.info.tsx
+│           ├── game.operate.tsx
+│           ├── game.rule.tsx
+│           ├── game.status.tsx
+│           ├── game.tsx
+│           ├── gobang.css
+│           └── page.tsx
+```
+
+## 贡献指南
+
+欢迎提交PR改进项目！请确保：
+
+1. 代码符合ESLint规则
+2. 包含必要的单元测试
+3. 更新相关文档
+
+## 许可证
+
+本项目采用 MIT 许可证
