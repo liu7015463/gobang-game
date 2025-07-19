@@ -1,6 +1,8 @@
 # 五子棋游戏 (Gobang Game)
 
-基于Next.js构建的五子棋游戏，支持双人对战模式。包含完整的游戏逻辑和响应式UI设计。
+基于Next.js构建的五子棋游戏。包含完整的游戏逻辑和响应式UI设计。
+
+<img width="983" height="857" alt="image" src="https://github.com/user-attachments/assets/91028950-8ea6-4470-8f12-7e52b8893228" />
 
 ## 功能特性
 
